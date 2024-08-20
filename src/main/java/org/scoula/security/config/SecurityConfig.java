@@ -41,6 +41,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
+
         http.addFilterBefore(encodingFilter(), CsrfFilter.class);
 
         // 경로별 접근 권한 설정
@@ -50,9 +51,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/security/member").access("hasRole('ROLE_MEMBER')");
 
         http.formLogin()
-                .loginPage("/security/login") // Get
-                .loginProcessingUrl("/security/login") // Post
-                .defaultSuccessUrl("/");
+                .loginPage("/security/login") // Get 리다이렉트
+                .loginProcessingUrl("/security/login"); // Post
+//                .defaultSuccessUrl("/");
 
         http.logout() // 로그아웃 설정 시작
                 .logoutUrl("/security/logout") // POST: 로그아웃 호출 url
@@ -64,11 +65,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+
 //        auth.inMemoryAuthentication()
 //                .withUser("admin")
 //                .password("{noop}1234")
 //                .roles("ADMIN", "MEMBER"); // ROLE_ADMIN
-
+//
 //        auth.inMemoryAuthentication()
 //                .withUser("admin")
 //                .password(passwordEncoder().encode("1234"))
@@ -81,6 +83,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .roles("MEMBER"); // ROLE_MEMBER
 
         // in memory user 정보 삭제 → UserDetailsService와 같이 사용 불가
+
+        // 1234 -> 암호화 -> $2a$10$EsIMfxbJ6NuvwX7MDj4WqOYFzLU9U/lddCyn0nic5dFo3VfJYrXYC
+
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
 
 

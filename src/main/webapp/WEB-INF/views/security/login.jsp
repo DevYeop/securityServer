@@ -8,7 +8,10 @@
 </head>
 <body>
 <h1>login</h1>
+
+
 <%--<form name='f' action='/security/login' method='POST'>--%>
+
 <form name='f' method='POST'>
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
     <table>

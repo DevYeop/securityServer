@@ -24,7 +24,7 @@ public class SecurityController {
     // most used
     @GetMapping("/member")
     public void doMember(Principal principal) {
-        log.info("username = " + principal.getName());
+        log.info("username = " + principal.getName()); // sangyeop0715
     }
 
     @GetMapping("/member222")
@@ -39,14 +39,18 @@ public class SecurityController {
     }
 
     @GetMapping("/login")
-    public void login() {
+    public void login() { // /security/login
         log.info("login page");
     }
 
     @GetMapping("/admin222")
     public void doAdmin(@AuthenticationPrincipal CustomUser customUser) {
-        MemberVO member = customUser.getMember();
+        MemberVO member = customUser.getMember(); // // nickname 마시마로1
+        
+        String userEmail = member.getEmail();
+
         log.info("username = " + member);
+        log.info("userEmail = " + userEmail);
     }
 
     @GetMapping("/logout")

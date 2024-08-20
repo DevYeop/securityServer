@@ -12,12 +12,13 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class MemberVO {
-    private String username;
-    private String password;
-    private String email;
+    private String username; // admin
+    private String password; //
+    private String email; //
     private Date regDate;
     private Date updateDate;
-    private List<AuthVO> authList; // 권한 목록, join 처리 필요
+
+    private List<AuthVO> authList;
 
     UserDetails details;
 }
